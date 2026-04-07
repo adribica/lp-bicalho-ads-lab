@@ -82,7 +82,7 @@ export const landingContent: Record<'en' | 'pt-BR', LandingContent> = {
       badge: 'Paid Ads With No Fixed Fee',
       title: 'You Only Pay When You Make Sales',
       description:
-        'Stop wasting money on ads with no guarantee of return. We build, launch, and manage your ads with zero upfront management cost.',
+        'Stop wasting money on ads with no guarantee of return. We create the strategy, creatives, launch, and management with no fixed management fee. You still invest in ad spend.',
       points: [
         'No expensive monthly retainers',
         'No agencies profiting without performance',
@@ -94,7 +94,7 @@ export const landingContent: Record<'en' | 'pt-BR', LandingContent> = {
       metrics: [
         {
           value: 'Zero upfront management cost',
-          label: 'You only invest in ad spend while we handle the entire strategy, execution, and optimization.',
+          label: 'You only invest in ad spend while we handle strategy, creatives, execution, and optimization.',
         },
         {
           value: 'Results-first compensation',
@@ -204,7 +204,7 @@ export const landingContent: Record<'en' | 'pt-BR', LandingContent> = {
       badge: 'Tráfego Pago Sem Taxa Fixa',
       title: 'Você Só Paga Quando Faz Vendas',
       description:
-        'Pare de desperdiçar dinheiro com anúncios sem garantia de retorno. Nós criamos, lançamos e gerenciamos seus anúncios com zero custo inicial de gestão.',
+        'Pare de desperdiçar dinheiro com anúncios sem garantia de retorno. Nós criamos a estratégia, os criativos, o lançamento e a gestão sem taxa fixa de gerenciamento. O investimento em tráfego continua sendo seu.',
       points: [
         'Sem mensalidades caras',
         'Sem agências lucrando sem performance',
@@ -216,7 +216,7 @@ export const landingContent: Record<'en' | 'pt-BR', LandingContent> = {
       metrics: [
         {
           value: 'Zero custo de gestão antecipado',
-          label: 'Você investe apenas no tráfego enquanto nós cuidamos da estratégia, execução e otimização.',
+          label: 'Você investe apenas no tráfego enquanto nós cuidamos da estratégia, dos criativos, da execução e da otimização.',
         },
         {
           value: 'Remuneração por resultado',
