@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from 'react';
-import { ArrowRight, Mail, Phone, BriefcaseBusiness, UserRound } from 'lucide-react';
+import { ArrowRight, BriefcaseBusiness, Mail, Phone, UserRound } from 'lucide-react';
 
 type FormState = {
   name: string;
@@ -83,17 +83,21 @@ const LeadCaptureForm = () => {
     <section id="apply" className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
       <div className="grid gap-8 rounded-[2rem] border border-[var(--line)] bg-white p-8 shadow-[0_24px_80px_rgba(50,35,86,0.07)] lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
         <div className="rounded-[1.75rem] bg-[linear-gradient(180deg,#24183f,#38255f)] p-8 text-white">
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-white/60">Lead capture</p>
-          <h2 className="mt-4 font-display text-4xl font-bold tracking-[-0.04em]">Tell us about your business and we&apos;ll map the next move.</h2>
+          <p className="text-sm font-bold uppercase tracking-[0.22em] text-white/60">Get Your Free Ad Strategy Plan</p>
+          <h2 className="mt-4 font-display text-4xl font-bold tracking-[-0.04em]">
+            See how you can attract customers daily with a model where you only pay when you win.
+          </h2>
           <p className="mt-5 text-base leading-8 text-white/72">
-            This form is built for prospects who prefer a direct professional contact flow. Leave your details and
-            your business name so the team can evaluate fit and reach out with the right next step.
+            Leave your details and we&apos;ll review your business, map the opportunity, and show you how
+            this performance-based model can work for your growth.
           </p>
 
           <div className="mt-8 grid gap-4 text-sm text-white/75">
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">Short form built to reduce drop-off from cold traffic.</div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">Best used with a webhook, CRM, or automation destination.</div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">Professional intake for users who do not want to use WhatsApp.</div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">Limited spots available.</div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">No fixed fees.</div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+              No unnecessary risk. Just performance-driven growth.
+            </div>
           </div>
         </div>
 
@@ -159,7 +163,7 @@ const LeadCaptureForm = () => {
             disabled={status === 'loading'}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--brand)] px-7 py-4 text-base font-bold text-white transition hover:bg-[var(--brand-deep)] disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {status === 'loading' ? 'Submitting...' : 'Request My Free Ads Plan'}
+            {status === 'loading' ? 'Submitting...' : 'Get My Free Plan'}
             <ArrowRight className="h-4 w-4" />
           </button>
 
