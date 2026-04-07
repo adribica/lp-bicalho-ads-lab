@@ -1,11 +1,16 @@
 import { FormEvent, useMemo, useState } from 'react';
 import { ArrowRight, BriefcaseBusiness, Mail, Phone, UserRound } from 'lucide-react';
+import type { LandingContent } from '../content';
 
 type FormState = {
   name: string;
   phone: string;
   email: string;
   business: string;
+};
+
+type LeadCaptureFormProps = {
+  content: LandingContent;
 };
 
 const initialState: FormState = {
@@ -20,7 +25,7 @@ const defaultWebhookUrl = 'https://webhook.bicalhoadslab.digital/webhook/lpbical
 const fieldStyles =
   'w-full rounded-2xl border border-[var(--line-strong)] bg-white px-4 py-4 text-base text-[var(--ink)] outline-none transition placeholder:text-[var(--ink-faint)] focus:border-[var(--brand)] focus:ring-4 focus:ring-[rgba(137,94,230,0.14)]';
 
-const LeadCaptureForm = () => {
+const LeadCaptureForm = ({ content }: LeadCaptureFormProps) => {
   const [form, setForm] = useState<FormState>(initialState);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [feedback, setFeedback] = useState('');
@@ -42,40 +47,37 @@ const LeadCaptureForm = () => {
 
     if (!isValid) {
       setStatus('error');
-      setFeedback('Please enter a valid name, business, email, and phone number.');
+      setFeedback(content.form.invalidMessage);
       return;
     }
 
     setStatus('loading');
-    setFeedback('Submitting your information...');
+    setFeedback(content.form.submittingMessage);
 
     try {
-      if (webhookUrl) {
-        const response = await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: form.name.trim(),
-            phone: form.phone.trim(),
-            email: form.email.trim(),
-            business: form.business.trim(),
-            source: 'us-paid-traffic-landing-page',
-          }),
-        });
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          phone: form.phone.trim(),
+          email: form.email.trim(),
+          business: form.business.trim(),
+          source: content.form.source,
+          locale: content.locale,
+        }),
+      });
 
-        if (!response.ok) {
-          throw new Error('Webhook request failed.');
-        }
+      if (!response.ok) {
+        throw new Error('Webhook request failed.');
       }
 
       setStatus('success');
-      setFeedback(
-        'Thanks. Your request has been received and the team can review your business.',
-      );
+      setFeedback(content.form.successMessage);
       setForm(initialState);
     } catch {
       setStatus('error');
-      setFeedback('We could not send your request right now. Please try again in a moment.');
+      setFeedback(content.form.errorMessage);
     }
   };
 
@@ -83,76 +85,75 @@ const LeadCaptureForm = () => {
     <section id="apply" className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
       <div className="grid gap-8 rounded-[2rem] border border-[var(--line)] bg-white p-8 shadow-[0_24px_80px_rgba(50,35,86,0.07)] lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
         <div className="rounded-[1.75rem] bg-[linear-gradient(180deg,#24183f,#38255f)] p-8 text-white">
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-white/60">Get Your Free Ad Strategy Plan</p>
+          <p className="text-sm font-bold uppercase tracking-[0.22em] text-white/60">{content.form.eyebrow}</p>
           <h2 className="mt-4 font-display text-4xl font-bold tracking-[-0.04em]">
-            See how you can attract customers daily with a model where you only pay when you win.
+            {content.form.title}
           </h2>
           <p className="mt-5 text-base leading-8 text-white/72">
-            Leave your details and we&apos;ll review your business, map the opportunity, and show you how
-            this performance-based model can work for your growth.
+            {content.form.description}
           </p>
 
           <div className="mt-8 grid gap-4 text-sm text-white/75">
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">Limited spots available.</div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">No fixed fees.</div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
-              No unnecessary risk. Just performance-driven growth.
-            </div>
+            {content.form.callouts.map((callout) => (
+              <div key={callout} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                {callout}
+              </div>
+            ))}
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="grid gap-5">
           <label className="grid gap-2">
-            <span className="text-sm font-bold text-[var(--ink)]">Full name</span>
+            <span className="text-sm font-bold text-[var(--ink)]">{content.form.labels.name}</span>
             <div className="relative">
               <UserRound className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--brand)]" />
               <input
                 type="text"
                 value={form.name}
                 onChange={(event) => updateField('name', event.target.value)}
-                placeholder="John Smith"
+                placeholder={content.form.placeholders.name}
                 className={`${fieldStyles} pl-12`}
               />
             </div>
           </label>
 
           <label className="grid gap-2">
-            <span className="text-sm font-bold text-[var(--ink)]">Phone</span>
+            <span className="text-sm font-bold text-[var(--ink)]">{content.form.labels.phone}</span>
             <div className="relative">
               <Phone className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--brand)]" />
               <input
                 type="tel"
                 value={form.phone}
                 onChange={(event) => updateField('phone', event.target.value)}
-                placeholder="(555) 123-4567"
+                placeholder={content.form.placeholders.phone}
                 className={`${fieldStyles} pl-12`}
               />
             </div>
           </label>
 
           <label className="grid gap-2">
-            <span className="text-sm font-bold text-[var(--ink)]">Email</span>
+            <span className="text-sm font-bold text-[var(--ink)]">{content.form.labels.email}</span>
             <div className="relative">
               <Mail className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--brand)]" />
               <input
                 type="email"
                 value={form.email}
                 onChange={(event) => updateField('email', event.target.value)}
-                placeholder="you@company.com"
+                placeholder={content.form.placeholders.email}
                 className={`${fieldStyles} pl-12`}
               />
             </div>
           </label>
 
           <label className="grid gap-2">
-            <span className="text-sm font-bold text-[var(--ink)]">Business name</span>
+            <span className="text-sm font-bold text-[var(--ink)]">{content.form.labels.business}</span>
             <div className="relative">
               <BriefcaseBusiness className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--brand)]" />
               <input
                 type="text"
                 value={form.business}
                 onChange={(event) => updateField('business', event.target.value)}
-                placeholder="Your company"
+                placeholder={content.form.placeholders.business}
                 className={`${fieldStyles} pl-12`}
               />
             </div>
@@ -163,7 +164,7 @@ const LeadCaptureForm = () => {
             disabled={status === 'loading'}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--brand)] px-7 py-4 text-base font-bold text-white transition hover:bg-[var(--brand-deep)] disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {status === 'loading' ? 'Submitting...' : 'Get My Free Plan'}
+            {status === 'loading' ? content.form.submittingMessage : content.form.submitLabel}
             <ArrowRight className="h-4 w-4" />
           </button>
 
@@ -176,7 +177,7 @@ const LeadCaptureForm = () => {
                   : 'text-[var(--ink-soft)]'
             }`}
           >
-            {feedback || 'We only ask for the four fields needed to qualify and contact the lead.'}
+            {feedback || content.form.helper}
           </p>
         </form>
       </div>

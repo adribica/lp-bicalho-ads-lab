@@ -5,8 +5,14 @@ import OfferHighlights from './components/OfferHighlights';
 import ProcessSection from './components/ProcessSection';
 import SocialProof from './components/SocialProof';
 import LeadCaptureForm from './components/LeadCaptureForm';
+import { landingContent } from './content';
 
 function App() {
+  const content =
+    typeof window !== 'undefined' && window.location.pathname.startsWith('/br')
+      ? landingContent['pt-BR']
+      : landingContent.en;
+
   return (
     <div className="min-h-screen bg-[var(--canvas)] text-[var(--ink)]">
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
@@ -15,17 +21,17 @@ function App() {
         <div className="absolute left-[-10rem] top-[54rem] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(167,126,255,0.2),transparent_72%)]" />
       </div>
 
-      <Header />
+      <Header content={content} />
 
       <main>
-        <LandingHero />
-        <OfferHighlights />
-        <ProcessSection />
-        <SocialProof />
-        <LeadCaptureForm />
+        <LandingHero content={content} />
+        <OfferHighlights content={content} />
+        <ProcessSection content={content} />
+        <SocialProof content={content} />
+        <LeadCaptureForm content={content} />
       </main>
 
-      <Footer />
+      <Footer content={content} />
     </div>
   );
 }

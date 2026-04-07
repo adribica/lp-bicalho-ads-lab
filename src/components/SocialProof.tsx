@@ -1,33 +1,21 @@
 import { Quote, Star } from 'lucide-react';
+import type { LandingContent } from '../content';
 
-const proofItems = [
-  {
-    quote: 'For the first time, running ads actually felt low-risk.',
-    person: 'Local business owner',
-  },
-  {
-    quote: 'They were focused on results, not just charging a fee.',
-    person: 'Service provider',
-  },
-];
+type SocialProofProps = {
+  content: LandingContent;
+};
 
-const stats = [
-  { value: 'Aligned incentives', label: 'We grow together.' },
-  { value: 'Lower risk', label: 'No paying for empty promises.' },
-  { value: 'Sales-driven strategy', label: 'Not just traffic, but conversions.' },
-];
-
-const SocialProof = () => {
+const SocialProof = ({ content }: SocialProofProps) => {
   return (
     <section className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="rounded-[2rem] bg-[var(--ink)] p-8 text-white md:p-10">
-          <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/60">Why This Works Better</p>
+          <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/60">{content.socialProof.eyebrow}</p>
           <h2 className="mt-4 font-display text-4xl font-bold tracking-[-0.04em]">
-            Lower risk. Better alignment. Stronger performance focus.
+            {content.socialProof.title}
           </h2>
           <div className="mt-8 grid gap-4">
-            {stats.map((stat) => (
+            {content.socialProof.stats.map((stat) => (
               <div key={stat.value} className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
                 <p className="font-display text-2xl font-bold tracking-[-0.04em] text-white">{stat.value}</p>
                 <p className="mt-2 text-sm leading-7 text-white/70">{stat.label}</p>
@@ -37,7 +25,7 @@ const SocialProof = () => {
         </div>
 
         <div className="grid gap-5">
-          {proofItems.map((item) => (
+          {content.socialProof.quotes.map((item) => (
             <article
               key={item.person}
               className="rounded-[1.75rem] border border-[var(--line)] bg-white p-6 shadow-[0_18px_50px_rgba(50,35,86,0.05)]"
