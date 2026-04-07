@@ -5,6 +5,7 @@ import OfferHighlights from './components/OfferHighlights';
 import ProcessSection from './components/ProcessSection';
 import SocialProof from './components/SocialProof';
 import LeadCaptureForm from './components/LeadCaptureForm';
+import GoogleTagManager from './components/GoogleTagManager';
 import { landingContent } from './content';
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[var(--canvas)] text-[var(--ink)]">
+      <GoogleTagManager />
+
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-[-12rem] h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(144,92,255,0.18),transparent_68%)]" />
         <div className="absolute right-[-8rem] top-[20rem] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(210,188,255,0.3),transparent_72%)]" />
