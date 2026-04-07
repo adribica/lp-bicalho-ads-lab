@@ -8,8 +8,9 @@ import LeadCaptureForm from './components/LeadCaptureForm';
 import { landingContent } from './content';
 
 function App() {
+  const pathname = typeof window !== 'undefined' ? window.location.pathname.toLowerCase() : '/';
   const content =
-    typeof window !== 'undefined' && window.location.pathname.startsWith('/br')
+    pathname.startsWith('/br')
       ? landingContent['pt-BR']
       : landingContent.en;
 
