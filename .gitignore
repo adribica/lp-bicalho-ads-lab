@@ -17,6 +17,7 @@ dist-ssr
 build_errors.txt
 ts_errors.txt
 out.txt
+skills/
 
 # Editor directories and files
 .vscode/*
