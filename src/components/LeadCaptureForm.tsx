@@ -65,6 +65,7 @@ const LeadCaptureForm = ({ content }: LeadCaptureFormProps) => {
           business: form.business.trim(),
           source: content.form.source,
           locale: content.locale,
+          country: content.country,
         }),
       });
 

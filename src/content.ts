@@ -5,6 +5,7 @@ export type NavItem = {
 
 export type LandingContent = {
   locale: 'en' | 'pt-BR';
+  country: 'eua' | 'brasil';
   navItems: NavItem[];
   ctaLabel: string;
   footerDescription: string;
@@ -68,6 +69,7 @@ export type LandingContent = {
 export const landingContent: Record<'en' | 'pt-BR', LandingContent> = {
   en: {
     locale: 'en',
+    country: 'eua',
     navItems: [
       { label: 'How it Works', href: '#process' },
       { label: 'Results', href: '#results' },
@@ -189,6 +191,7 @@ export const landingContent: Record<'en' | 'pt-BR', LandingContent> = {
   },
   'pt-BR': {
     locale: 'pt-BR',
+    country: 'brasil',
     navItems: [
       { label: 'Como Funciona', href: '#process' },
       { label: 'Resultados', href: '#results' },
