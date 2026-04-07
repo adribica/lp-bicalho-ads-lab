@@ -15,6 +15,8 @@ const initialState: FormState = {
   business: '',
 };
 
+const defaultWebhookUrl = 'https://webhook.bicalhoadslab.digital/webhook/lpbicalhoeua';
+
 const fieldStyles =
   'w-full rounded-2xl border border-[var(--line-strong)] bg-white px-4 py-4 text-base text-[var(--ink)] outline-none transition placeholder:text-[var(--ink-faint)] focus:border-[var(--brand)] focus:ring-4 focus:ring-[rgba(137,94,230,0.14)]';
 
@@ -23,7 +25,7 @@ const LeadCaptureForm = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [feedback, setFeedback] = useState('');
 
-  const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+  const webhookUrl = import.meta.env.VITE_WEBHOOK_URL || defaultWebhookUrl;
 
   const isValid = useMemo(() => {
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email);
@@ -68,9 +70,7 @@ const LeadCaptureForm = () => {
 
       setStatus('success');
       setFeedback(
-        webhookUrl
-          ? 'Thanks. Your request has been received and the team can review your business.'
-          : 'The page is ready. Add VITE_WEBHOOK_URL to capture submissions in your CRM or automation flow.',
+        'Thanks. Your request has been received and the team can review your business.',
       );
       setForm(initialState);
     } catch {
