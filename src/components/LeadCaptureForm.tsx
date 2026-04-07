@@ -84,7 +84,7 @@ const LeadCaptureForm = () => {
       <div className="grid gap-8 rounded-[2rem] border border-[var(--line)] bg-white p-8 shadow-[0_24px_80px_rgba(50,35,86,0.07)] lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
         <div className="rounded-[1.75rem] bg-[linear-gradient(180deg,#24183f,#38255f)] p-8 text-white">
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-white/60">Lead capture</p>
-          <h2 className="mt-4 font-display text-4xl font-bold tracking-[-0.04em]">Tell us about your business and we’ll map the next move.</h2>
+          <h2 className="mt-4 font-display text-4xl font-bold tracking-[-0.04em]">Tell us about your business and we&apos;ll map the next move.</h2>
           <p className="mt-5 text-base leading-8 text-white/72">
             This form is built for prospects who prefer a direct professional contact flow. Leave your details and
             your business name so the team can evaluate fit and reach out with the right next step.
