@@ -6,17 +6,30 @@ import ProcessSection from './components/ProcessSection';
 import SocialProof from './components/SocialProof';
 import LeadCaptureForm from './components/LeadCaptureForm';
 import GoogleTagManager from './components/GoogleTagManager';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import { landingContent } from './content';
 
 function App() {
   const pathname = typeof window !== 'undefined' ? window.location.pathname.toLowerCase() : '/';
+  const normalizedPath =
+    pathname.length > 1 && pathname.endsWith('/')
+      ? pathname.slice(0, -1)
+      : pathname;
+  const isBrazilPath = normalizedPath.startsWith('/br');
+  const isPrivacyPage =
+    normalizedPath === '/privacy-policy' || normalizedPath === '/br/privacy-policy';
   const content =
-    pathname.startsWith('/br')
+    isBrazilPath
       ? landingContent['pt-BR']
       : landingContent.en;
+  const homePath = isBrazilPath ? '/br' : '/';
+
+  if (isPrivacyPage) {
+    return <PrivacyPolicyPage homePath={homePath} locale={content.locale} />;
+  }
 
   return (
-    <div className="min-h-screen bg-[var(--canvas)] text-[var(--ink)]">
+    <div id="top" className="min-h-screen bg-[var(--canvas)] text-[var(--ink)]">
       <GoogleTagManager />
 
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
